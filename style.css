@@ -1,99 +1,223 @@
-/* --- 1. Reset Básico e Padrões Globais --- */
+/* =============================================
+   1. RESET E VARIÁVEIS GLOBAIS
+   ============================================= */
+:root {
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-title: 2rem;
+    --font-size-card-title: 1.1rem;
+    --font-size-card-desc: 0.9rem;
+    --color-bg: #f8f9fa;
+    --color-text: #333;
+    --color-text-light: #5f6368;
+    --color-text-dark: #202124;
+    --color-white: #fff;
+    --color-border: #dfe1e5;
+    --color-shadow: rgba(32,33,36,0.1);
+    --color-shadow-hover: rgba(32,33,36,0.2);
+    --color-header: #5f6368;
+    --color-btn: #80868b;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --border-radius: 8px;
+    --border-radius-lg: 24px;
+    --transition-speed: 0.2s;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
+html {
+    font-size: var(--font-size-base);
+    scroll-behavior: smooth;
+}
+
+body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8f9fa; /* Um branco um pouco mais suave */
-    color: #333;
-    line-height: 1.6;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
     text-decoration: none;
-    color: inherit; /* Herda a cor do elemento pai */
+    color: inherit;
 }
 
 button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem; /* Tamanho dos ícones */
+    font-family: inherit;
+    font-size: inherit;
 }
 
 img {
     max-width: 100%;
     display: block;
+    height: auto;
 }
 
-/* --- 2. Estrutura e Layout --- */
+/* =============================================
+   2. CONTAINER - Mobile First (margens mínimas)
+   ============================================= */
 .container {
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto; /* Centraliza o conteúdo */
-    padding: 0 20px; /* Espaçamento nas laterais */
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm); /* Margens mínimas no mobile */
 }
 
-/* --- 3. Cabeçalho --- */
+/* =============================================
+   3. CABEÇALHO - Mobile First
+   ============================================= */
+.main-header {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 .main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    min-height: 48px;
 }
 
 .header-menu {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço entre o menu e o logo */
+    gap: var(--spacing-sm);
 }
 
 .logo-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #5f6368;
+    color: var(--color-header);
+    white-space: nowrap;
 }
 
-.menu-btn, .account-btn {
-    color: #5f6368;
+.menu-btn {
+    font-size: 1.3rem;
+    color: var(--color-header);
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    transition: background-color var(--transition-speed);
 }
 
-/* --- 4. Seção de Pesquisa --- */
+.menu-btn:hover,
+.menu-btn:focus {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.font-controls {
+    display: flex;
+    gap: 2px;
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius);
+    padding: 2px;
+}
+
+.font-btn {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-header);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 6px;
+    transition: all var(--transition-speed);
+    line-height: 1;
+}
+
+.font-btn:hover,
+.font-btn:focus {
+    background-color: var(--color-white);
+    box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.font-btn:active {
+    transform: scale(0.95);
+}
+
+.account-btn {
+    font-size: 1.3rem;
+    color: var(--color-header);
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    transition: background-color var(--transition-speed);
+}
+
+.account-btn:hover,
+.account-btn:focus {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* =============================================
+   4. SEÇÃO DE PESQUISA - Mobile First
+   ============================================= */
 .search-section {
     text-align: center;
-    padding: 60px 0;
+    padding: var(--spacing-3xl) 0 var(--spacing-xl);
 }
 
 .main-title {
-    font-size: 3.5rem;
+    font-size: var(--font-size-title);
     font-weight: 700;
-    margin-bottom: 30px;
-    color: #202124;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text-dark);
+    line-height: 1.2;
 }
 
 .search-bar {
     display: flex;
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    box-shadow: 0 1px 6px rgba(32,33,36,0.1);
-    transition: box-shadow 0.2s;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 1px 6px var(--color-shadow);
+    transition: box-shadow var(--transition-speed);
+    background-color: var(--color-white);
 }
 
-.search-bar:hover, .search-bar:focus-within {
-    box-shadow: 0 2px 8px rgba(32,33,36,0.2);
+.search-bar:hover,
+.search-bar:focus-within {
+    box-shadow: 0 2px 8px var(--color-shadow-hover);
 }
 
 #search-input {
     flex-grow: 1;
     border: none;
     background: transparent;
-    padding: 12px 20px;
+    padding: var(--spacing-md) var(--spacing-lg);
     font-size: 1rem;
+    color: var(--color-text);
+    min-width: 0;
+}
+
+#search-input::placeholder {
+    color: var(--color-btn);
 }
 
 #search-input:focus {
@@ -101,70 +225,182 @@ img {
 }
 
 .search-bar button {
-    padding: 0 20px;
+    padding: 0 var(--spacing-lg);
     font-size: 1.2rem;
-    color: #80868b;
+    color: var(--color-btn);
+    transition: color var(--transition-speed);
 }
 
-/* --- 5. Grade de Artigos --- */
+.search-bar button:hover {
+    color: var(--color-text-dark);
+}
+
+/* =============================================
+   5. GRADE DE ARTIGOS - Mobile First
+   ============================================= */
 .card-grid {
     display: grid;
-    /* Cria colunas responsivas: elas terão no mínimo 300px e no máximo 1fr (ocupam o espaço disponível) */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px; /* Espaçamento entre os cards */
-    padding-bottom: 60px;
+    grid-template-columns: 1fr; /* Uma coluna no mobile */
+    gap: var(--spacing-lg);
+    padding-bottom: var(--spacing-3xl);
 }
 
 .article-card {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden; /* Garante que a imagem não "vaze" das bordas arredondadas */
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform var(--transition-speed) ease-in-out, 
+                box-shadow var(--transition-speed) ease-in-out;
 }
 
 .article-card:hover {
-    transform: translateY(-5px); /* Efeito de "levantar" o card */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.article-card:active {
+    transform: translateY(-1px);
 }
 
 .article-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    height: 180px;
+    object-fit: cover;
 }
 
 .card-content {
-    padding: 20px;
+    padding: var(--spacing-lg);
 }
 
 .card-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    /* Limita o título a 2 linhas */
+    font-size: var(--font-size-card-title);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-dark);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.4;
 }
 
 .card-content p {
-    font-size: 0.95rem;
-    color: #5f6368;
-    /* Limita a descrição a 2 linhas */
+    font-size: var(--font-size-card-desc);
+    color: var(--color-text-light);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.5;
 }
 
-/* --- 6. Responsividade para Telas Pequenas --- */
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 2.5rem;
+/* =============================================
+   6. TABLETS (768px+)
+   ============================================= */
+@media (min-width: 768px) {
+    :root {
+        --font-size-title: 2.5rem;
+        --font-size-card-title: 1.2rem;
+        --font-size-card-desc: 0.95rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-xl);
+    }
+
+    .main-header .container {
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
     }
 
     .search-section {
-        padding: 40px 0;
+        padding: 60px 0 var(--spacing-2xl);
     }
+
+    .search-bar {
+        max-width: 600px;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+        gap: var(--spacing-xl);
+    }
+
+    .article-card img {
+        height: 200px;
+    }
+
+    .card-content {
+        padding: var(--spacing-xl);
+    }
+}
+
+/* =============================================
+   7. DESKTOP (1024px+)
+   ============================================= */
+@media (min-width: 1024px) {
+    :root {
+        --font-size-title: 3.5rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-3xl);
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr); /* Três colunas */
+        gap: var(--spacing-2xl);
+    }
+
+    .article-card img {
+        height: 200px;
+    }
+}
+
+/* =============================================
+   8. TELAS GRANDES (1440px+)
+   ============================================= */
+@media (min-width: 1440px) {
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr); /* Quatro colunas */
+    }
+}
+
+/* =============================================
+   9. ACESSIBILIDADE
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Foco visível para navegação por teclado */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid #4A90D9;
+    outline-offset: 2px;
+}
+
+/* =============================================
+   10. UTILITÁRIOS
+   ============================================= */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
