@@ -1,406 +1,239 @@
-/* =============================================
-   1. RESET E VARIÁVEIS GLOBAIS
-   ============================================= */
-:root {
-    --font-size-base: 16px;
-    --font-size-sm: 14px;
-    --font-size-lg: 18px;
-    --font-size-xl: 20px;
-    --font-size-title: 2rem;
-    --font-size-card-title: 1.1rem;
-    --font-size-card-desc: 0.9rem;
-    --color-bg: #f8f9fa;
-    --color-text: #333;
-    --color-text-light: #5f6368;
-    --color-text-dark: #202124;
-    --color-white: #fff;
-    --color-border: #dfe1e5;
-    --color-shadow: rgba(32,33,36,0.1);
-    --color-shadow-hover: rgba(32,33,36,0.2);
-    --color-header: #5f6368;
-    --color-btn: #80868b;
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 12px;
-    --spacing-lg: 16px;
-    --spacing-xl: 20px;
-    --spacing-2xl: 24px;
-    --spacing-3xl: 32px;
-    --border-radius: 8px;
-    --border-radius-lg: 24px;
-    --transition-speed: 0.2s;
-}
+/**
+ * DEZ-Envolvimento - Script Principal
+ * Funcionalidades: Busca de artigos e controle de tamanho de fonte
+ */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// =============================================
+// 1. AGUARDAR CARREGAMENTO DO DOM
+// =============================================
+document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
 
-html {
-    font-size: var(--font-size-base);
-    scroll-behavior: smooth;
-}
+    // =============================================
+    // 2. ELEMENTOS DO DOM
+    // =============================================
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const cardGrid = document.getElementById('card-grid');
+    const articleCards = document.querySelectorAll('.article-card');
+    const decreaseFontBtn = document.getElementById('decrease-font');
+    const increaseFontBtn = document.getElementById('increase-font');
+    const htmlElement = document.documentElement;
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.5;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+    // =============================================
+    // 3. CONFIGURAÇÕES DE FONTE
+    // =============================================
+    const FONT_CONFIG = {
+        minSize: 14,    // Tamanho mínimo em pixels
+        maxSize: 22,    // Tamanho máximo em pixels
+        defaultSize: 16, // Tamanho padrão
+        step: 2         // Incremento/decremento
+    };
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    // =============================================
+    // 4. FUNÇÕES DE CONTROLE DE FONTE
+    // =============================================
 
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-    height: auto;
-}
-
-/* =============================================
-   2. CONTAINER - Mobile First (margens mínimas)
-   ============================================= */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-sm); /* Margens mínimas no mobile */
-}
-
-/* =============================================
-   3. CABEÇALHO - Mobile First
-   ============================================= */
-.main-header {
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: var(--spacing-sm);
-    padding-bottom: var(--spacing-sm);
-    min-height: 48px;
-}
-
-.header-menu {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.logo-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-header);
-    white-space: nowrap;
-}
-
-.menu-btn {
-    font-size: 1.3rem;
-    color: var(--color-header);
-    padding: var(--spacing-xs);
-    border-radius: 50%;
-    transition: background-color var(--transition-speed);
-}
-
-.menu-btn:hover,
-.menu-btn:focus {
-    background-color: rgba(0,0,0,0.05);
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.font-controls {
-    display: flex;
-    gap: 2px;
-    background-color: var(--color-bg);
-    border-radius: var(--border-radius);
-    padding: 2px;
-}
-
-.font-btn {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-header);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: 6px;
-    transition: all var(--transition-speed);
-    line-height: 1;
-}
-
-.font-btn:hover,
-.font-btn:focus {
-    background-color: var(--color-white);
-    box-shadow: 0 1px 3px var(--color-shadow);
-}
-
-.font-btn:active {
-    transform: scale(0.95);
-}
-
-.account-btn {
-    font-size: 1.3rem;
-    color: var(--color-header);
-    padding: var(--spacing-xs);
-    border-radius: 50%;
-    transition: background-color var(--transition-speed);
-}
-
-.account-btn:hover,
-.account-btn:focus {
-    background-color: rgba(0,0,0,0.05);
-}
-
-/* =============================================
-   4. SEÇÃO DE PESQUISA - Mobile First
-   ============================================= */
-.search-section {
-    text-align: center;
-    padding: var(--spacing-3xl) 0 var(--spacing-xl);
-}
-
-.main-title {
-    font-size: var(--font-size-title);
-    font-weight: 700;
-    margin-bottom: var(--spacing-xl);
-    color: var(--color-text-dark);
-    line-height: 1.2;
-}
-
-.search-bar {
-    display: flex;
-    max-width: 100%;
-    margin: 0 auto;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 1px 6px var(--color-shadow);
-    transition: box-shadow var(--transition-speed);
-    background-color: var(--color-white);
-}
-
-.search-bar:hover,
-.search-bar:focus-within {
-    box-shadow: 0 2px 8px var(--color-shadow-hover);
-}
-
-#search-input {
-    flex-grow: 1;
-    border: none;
-    background: transparent;
-    padding: var(--spacing-md) var(--spacing-lg);
-    font-size: 1rem;
-    color: var(--color-text);
-    min-width: 0;
-}
-
-#search-input::placeholder {
-    color: var(--color-btn);
-}
-
-#search-input:focus {
-    outline: none;
-}
-
-.search-bar button {
-    padding: 0 var(--spacing-lg);
-    font-size: 1.2rem;
-    color: var(--color-btn);
-    transition: color var(--transition-speed);
-}
-
-.search-bar button:hover {
-    color: var(--color-text-dark);
-}
-
-/* =============================================
-   5. GRADE DE ARTIGOS - Mobile First
-   ============================================= */
-.card-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Uma coluna no mobile */
-    gap: var(--spacing-lg);
-    padding-bottom: var(--spacing-3xl);
-}
-
-.article-card {
-    background-color: var(--color-white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    transition: transform var(--transition-speed) ease-in-out, 
-                box-shadow var(--transition-speed) ease-in-out;
-}
-
-.article-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-.article-card:active {
-    transform: translateY(-1px);
-}
-
-.article-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.card-content {
-    padding: var(--spacing-lg);
-}
-
-.card-content h3 {
-    font-size: var(--font-size-card-title);
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-text-dark);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.4;
-}
-
-.card-content p {
-    font-size: var(--font-size-card-desc);
-    color: var(--color-text-light);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.5;
-}
-
-/* =============================================
-   6. TABLETS (768px+)
-   ============================================= */
-@media (min-width: 768px) {
-    :root {
-        --font-size-title: 2.5rem;
-        --font-size-card-title: 1.2rem;
-        --font-size-card-desc: 0.95rem;
+    /**
+     * Obtém o tamanho atual da fonte do HTML
+     * @returns {number} Tamanho da fonte em pixels
+     */
+    function getCurrentFontSize() {
+        const computedStyle = getComputedStyle(htmlElement);
+        return parseInt(computedStyle.fontSize) || FONT_CONFIG.defaultSize;
     }
 
-    .container {
-        padding: 0 var(--spacing-xl);
+    /**
+     * Aplica o tamanho da fonte ao elemento HTML
+     * @param {number} size - Tamanho em pixels
+     */
+    function setFontSize(size) {
+        // Garantir que o tamanho está dentro dos limites
+        const clampedSize = Math.max(
+            FONT_CONFIG.minSize,
+            Math.min(FONT_CONFIG.maxSize, size)
+        );
+        
+        htmlElement.style.fontSize = clampedSize + 'px';
+        
+        // Salvar preferência no localStorage
+        try {
+            localStorage.setItem('dez-font-size', clampedSize);
+        } catch (e) {
+            // localStorage não disponível, ignorar
+            console.warn('Não foi possível salvar a preferência de fonte:', e);
+        }
+
+        // Atualizar estado dos botões
+        updateFontButtonsState(clampedSize);
     }
 
-    .main-header .container {
-        padding-top: var(--spacing-lg);
-        padding-bottom: var(--spacing-lg);
+    /**
+     * Atualiza o estado dos botões (desabilitar se atingir limites)
+     * @param {number} currentSize - Tamanho atual
+     */
+    function updateFontButtonsState(currentSize) {
+        decreaseFontBtn.disabled = currentSize <= FONT_CONFIG.minSize;
+        increaseFontBtn.disabled = currentSize >= FONT_CONFIG.maxSize;
+        
+        // Feedback visual para botões desabilitados
+        decreaseFontBtn.style.opacity = decreaseFontBtn.disabled ? '0.5' : '1';
+        increaseFontBtn.style.opacity = increaseFontBtn.disabled ? '0.5' : '1';
     }
 
-    .logo-text {
-        font-size: 1.2rem;
+    /**
+     * Aumenta o tamanho da fonte
+     */
+    function increaseFontSize() {
+        const currentSize = getCurrentFontSize();
+        const newSize = currentSize + FONT_CONFIG.step;
+        setFontSize(newSize);
     }
 
-    .search-section {
-        padding: 60px 0 var(--spacing-2xl);
+    /**
+     * Diminui o tamanho da fonte
+     */
+    function decreaseFontSize() {
+        const currentSize = getCurrentFontSize();
+        const newSize = currentSize - FONT_CONFIG.step;
+        setFontSize(newSize);
     }
 
-    .search-bar {
-        max-width: 600px;
+    /**
+     * Carrega a preferência de fonte salva
+     */
+    function loadFontPreference() {
+        try {
+            const savedSize = localStorage.getItem('dez-font-size');
+            if (savedSize) {
+                const size = parseInt(savedSize);
+                if (!isNaN(size) && size >= FONT_CONFIG.minSize && size <= FONT_CONFIG.maxSize) {
+                    setFontSize(size);
+                    return;
+                }
+            }
+        } catch (e) {
+            console.warn('Não foi possível carregar a preferência de fonte:', e);
+        }
+        
+        // Se não houver preferência salva, usar o padrão
+        setFontSize(FONT_CONFIG.defaultSize);
     }
 
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr); /* Duas colunas */
-        gap: var(--spacing-xl);
+    // =============================================
+    // 5. FUNÇÃO DE BUSCA
+    // =============================================
+
+    /**
+     * Filtra os artigos com base no termo de busca
+     * @param {string} searchTerm - Termo digitado pelo usuário
+     */
+    function filterArticles(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        
+        articleCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            
+            // Verificar se o termo está no título ou na descrição
+            const matches = title.includes(term) || description.includes(term);
+            
+            // Mostrar ou esconder o card com animação suave
+            if (matches) {
+                card.style.display = '';
+                card.style.opacity = '1';
+            } else {
+                card.style.opacity = '0';
+                // Pequeno delay para a animação de fade out
+                setTimeout(() => {
+                    card.style.display = 'none';
+                }, 200);
+            }
+        });
+
+        // Mostrar mensagem se nenhum resultado for encontrado
+        const visibleCards = document.querySelectorAll('.article-card[style*="display: none"]');
+        const existingMessage = document.querySelector('.no-results-message');
+        
+        if (visibleCards.length === articleCards.length && term !== '') {
+            // Nenhum resultado encontrado
+            if (!existingMessage) {
+                const message = document.createElement('p');
+                message.className = 'no-results-message';
+                message.textContent = 'Nenhum artigo encontrado para "' + searchTerm + '"';
+                message.style.cssText = `
+                    text-align: center;
+                    color: var(--color-text-light);
+                    font-size: 1.1rem;
+                    padding: var(--spacing-3xl) 0;
+                    grid-column: 1 / -1;
+                `;
+                cardGrid.appendChild(message);
+            }
+        } else {
+            // Remover mensagem se existir
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+        }
     }
 
-    .article-card img {
-        height: 200px;
-    }
+    // =============================================
+    // 6. EVENT LISTENERS
+    // =============================================
 
-    .card-content {
-        padding: var(--spacing-xl);
-    }
-}
+    // 6.1. Evento de busca (submit do formulário)
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        filterArticles(searchInput.value);
+    });
 
-/* =============================================
-   7. DESKTOP (1024px+)
-   ============================================= */
-@media (min-width: 1024px) {
-    :root {
-        --font-size-title: 3.5rem;
-    }
+    // 6.2. Evento de busca (digitação - para busca em tempo real)
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        // Debounce para evitar muitas operações durante a digitação
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            filterArticles(this.value);
+        }, 300);
+    });
 
-    .container {
-        padding: 0 var(--spacing-3xl);
-    }
+    // 6.3. Botão de aumentar fonte
+    increaseFontBtn.addEventListener('click', increaseFontSize);
 
-    .card-grid {
-        grid-template-columns: repeat(3, 1fr); /* Três colunas */
-        gap: var(--spacing-2xl);
-    }
+    // 6.4. Botão de diminuir fonte
+    decreaseFontBtn.addEventListener('click', decreaseFontSize);
 
-    .article-card img {
-        height: 200px;
-    }
-}
+    // 6.5. Atalhos de teclado
+    document.addEventListener('keydown', function(event) {
+        // Ctrl + + para aumentar
+        if (event.ctrlKey && event.key === '=') {
+            event.preventDefault();
+            increaseFontSize();
+        }
+        // Ctrl + - para diminuir
+        if (event.ctrlKey && event.key === '-') {
+            event.preventDefault();
+            decreaseFontSize();
+        }
+        // Ctrl + 0 para resetar
+        if (event.ctrlKey && event.key === '0') {
+            event.preventDefault();
+            setFontSize(FONT_CONFIG.defaultSize);
+        }
+    });
 
-/* =============================================
-   8. TELAS GRANDES (1440px+)
-   ============================================= */
-@media (min-width: 1440px) {
-    .card-grid {
-        grid-template-columns: repeat(4, 1fr); /* Quatro colunas */
-    }
-}
+    // =============================================
+    // 7. INICIALIZAÇÃO
+    // =============================================
+    
+    // Carregar preferência de fonte
+    loadFontPreference();
 
-/* =============================================
-   9. ACESSIBILIDADE
-   ============================================= */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
+    // Inicializar estado dos botões
+    updateFontButtonsState(getCurrentFontSize());
 
-/* Foco visível para navegação por teclado */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-    outline: 2px solid #4A90D9;
-    outline-offset: 2px;
-}
-
-/* =============================================
-   10. UTILITÁRIOS
-   ============================================= */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
+    // Log de inicialização
+    console.log('DEZ-Envolvimento inicializado com sucesso!');
+    console.log('Tamanho da fonte atual:', getCurrentFontSize() + 'px');
+});
