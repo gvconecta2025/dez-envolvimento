@@ -1,0 +1,170 @@
+/* --- 1. Reset Básico e Padrões Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* Um branco um pouco mais suave */
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Herda a cor do elemento pai */
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem; /* Tamanho dos ícones */
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- 2. Estrutura e Layout --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo */
+    padding: 0 20px; /* Espaçamento nas laterais */
+}
+
+/* --- 3. Cabeçalho --- */
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.header-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o menu e o logo */
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #5f6368;
+}
+
+.menu-btn, .account-btn {
+    color: #5f6368;
+}
+
+/* --- 4. Seção de Pesquisa --- */
+.search-section {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #202124;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    box-shadow: 0 1px 6px rgba(32,33,36,0.1);
+    transition: box-shadow 0.2s;
+}
+
+.search-bar:hover, .search-bar:focus-within {
+    box-shadow: 0 2px 8px rgba(32,33,36,0.2);
+}
+
+#search-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+#search-input:focus {
+    outline: none;
+}
+
+.search-bar button {
+    padding: 0 20px;
+    font-size: 1.2rem;
+    color: #80868b;
+}
+
+/* --- 5. Grade de Artigos --- */
+.card-grid {
+    display: grid;
+    /* Cria colunas responsivas: elas terão no mínimo 300px e no máximo 1fr (ocupam o espaço disponível) */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px; /* Espaçamento entre os cards */
+    padding-bottom: 60px;
+}
+
+.article-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que a imagem não "vaze" das bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.article-card:hover {
+    transform: translateY(-5px); /* Efeito de "levantar" o card */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    /* Limita o título a 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: #5f6368;
+    /* Limita a descrição a 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- 6. Responsividade para Telas Pequenas --- */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .search-section {
+        padding: 40px 0;
+    }
+}
