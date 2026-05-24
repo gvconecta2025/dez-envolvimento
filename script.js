@@ -1,76 +1,118 @@
-// Aguarda o DOM (estrutura HTML) carregar completamente antes de executar o código
-document.addEventListener('DOMContentLoaded', function() {
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEZ-Envolvimento - Desenvolvimento para Adolescentes</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
 
-    // --- 1. Capturar os elementos da página que vamos usar ---
-    const searchInput = document.getElementById('search-input'); // O campo de texto da busca
-    const searchForm = document.getElementById('search-form');   // O formulário da busca
-    const cardGrid = document.getElementById('card-grid');       // A grade que contém todos os cards
-    const articles = cardGrid.querySelectorAll('.article-card'); // Todos os cards de artigos
+    <!-- 1. Cabeçalho -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-menu">
+                <button class="menu-btn" aria-label="Abrir menu">☰</button>
+                <a href="index.html" class="logo-text">DEZ-Envolvimento</a>
+            </div>
+            <div class="header-account">
+                <button class="account-btn" aria-label="Acessar perfil">👤</button>
+            </div>
+        </div>
+    </header>
 
-    // --- 2. Função principal que faz a filtragem ---
-    function filterArticles() {
-        // Pega o texto digitado, remove espaços extras e converte para minúsculo
-        const searchTerm = searchInput.value.toLowerCase().trim();
+    <!-- 2. Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- 2.1. Seção de Pesquisa -->
+            <section class="search-section">
+                <h1 class="main-title">DEZ-Envolvimento</h1>
+                <form id="search-form" class="search-bar">
+                    <input type="search" id="search-input" placeholder="Pesquisar artigos...">
+                    <button type="submit" aria-label="Pesquisar">🔍</button>
+                </form>
+            </section>
 
-        // Para cada card de artigo...
-        articles.forEach(function(article) {
-            // Pega o título e a descrição do card atual
-            const title = article.querySelector('h3').textContent.toLowerCase();
-            const description = article.querySelector('p').textContent.toLowerCase();
+            <!-- 2.2. Grade de Artigos -->
+            <section class="card-grid" id="card-grid">
+                
+                <!-- Card do Artigo 0001 (Destaque) -->
+                <article class="article-card">
+                    <a href="https://dez-envolvimento.vercel.app/artigos/artigo0001.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/artigo0001.jpg" alt="Jovem estudando em seu quarto com livros e um caderno, simbolizando o desenvolvimento intelectual">
+                        <div class="card-content">
+                            <h3>Artigo 0001: O Desenvolvimento Cognitivo na Adolescência</h3>
+                            <p>Entenda como o cérebro do adolescente se desenvolve e como estimular o aprendizado.</p>
+                        </div>
+                    </a>
+                </article>
 
-            // Verifica se o termo de busca está contido no título OU na descrição
-            const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                <!-- Card de Artigo (Modelo) -->
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/fase-1.jpg" alt="Adolescente pensativo olhando para o horizonte, representando a crise de identidade">
+                        <div class="card-content">
+                            <h3>Fase 1: A Crise de Identidade e a Busca por Autonomia</h3>
+                            <p>Entenda os principais conflitos e desafios que marcam o início da adolescência.</p>
+                        </div>
+                    </a>
+                </article>
 
-            // Se corresponder à busca, mostra o card. Se não, esconde.
-            if (matchesSearch) {
-                article.style.display = 'block'; // Mostra o card
-            } else {
-                article.style.display = 'none';  // Esconde o card
-            }
-        });
-    }
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/socializacao.jpg" alt="Grupo de jovens conversando e rindo juntos">
+                        <div class="card-content">
+                            <h3>Fase 2: A Importância do Grupo e da Socialização</h3>
+                            <p>Como as amizades e os grupos sociais moldam o comportamento e a personalidade.</p>
+                        </div>
+                    </a>
+                </article>
 
-    // --- 3. Conectar a função aos eventos ---
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/futuro-carreira.jpg" alt="Jovem olhando um mapa de opções de carreira e futuro">
+                        <div class="card-content">
+                            <h3>Fase 3: O Despertar para o Futuro e a Carreira</h3>
+                            <p>Orientações para ajudar seu filho a pensar nas suas paixões e futuras escolhas profissionais.</p>
+                        </div>
+                    </a>
+                </article>
 
-    // Evento 1: Quando o usuário digitar no campo de busca (tempo real)
-    searchInput.addEventListener('input', filterArticles);
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/comunicacao.jpg" alt="Pai e filho conversando de forma aberta e amigável em um sofá">
+                        <div class="card-content">
+                            <h3>Comunicação Não-Violenta com Adolescentes</h3>
+                            <p>Técnicas para construir um diálogo aberto e de confiança, mesmo nos momentos difíceis.</p>
+                        </div>
+                    </a>
+                </article>
 
-    // Evento 2: Quando o usuário enviar o formulário (clicar na lupa ou apertar Enter)
-    searchForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o comportamento padrão de recarregar a página
-        filterArticles();       // Executa a filtragem
-    });
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/tecnologia.jpg" alt="Adolescente usando um smartphone com um olhar preocupado">
+                        <div class="card-content">
+                            <h3>Tecnologia e Saúde Mental: Limites Saudáveis</h3>
+                            <p>Como equilibrar o uso de telas e proteger o bem-estar emocional do seu filho.</p>
+                        </div>
+                    </a>
+                </article>
 
-    // (Opcional) Mostrar uma mensagem quando nenhum resultado for encontrado
-    // Vamos criar um elemento para isso
-    const noResultsMessage = document.createElement('p');
-    noResultsMessage.textContent = 'Nenhum artigo encontrado para esta busca.';
-    noResultsMessage.style.textAlign = 'center';
-    noResultsMessage.style.padding = '40px 0';
-    noResultsMessage.style.fontSize = '1.2rem';
-    noResultsMessage.style.color = '#5f6368';
-    noResultsMessage.style.display = 'none'; // Começa invisível
-    cardGrid.parentNode.insertBefore(noResultsMessage, cardGrid.nextSibling);
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/inteligencia-emocional.jpg" alt="Cérebro com ícones de emoções ao redor, simbolizando inteligência emocional">
+                        <div class="card-content">
+                            <h3>Desenvolvendo a Inteligência Emocional na Juventude</h3>
+                            <p>Atividades e conversas que fortalecem a resiliência e a empatia dos jovens.</p>
+                        </div>
+                    </a>
+                </article>
 
-    // Modificar a função filterArticles para mostrar a mensagem quando necessário
-    const originalFilter = filterArticles;
-    filterArticles = function() {
-        originalFilter(); // Executa a filtragem original
+            </section>
+        </div>
+    </main>
 
-        // Verifica se algum card está visível
-        let hasVisibleCards = false;
-        articles.forEach(function(article) {
-            if (article.style.display !== 'none') {
-                hasVisibleCards = true;
-            }
-        });
-
-        // Mostra ou esconde a mensagem de "nenhum resultado"
-        if (hasVisibleCards) {
-            noResultsMessage.style.display = 'none';
-        } else {
-            noResultsMessage.style.display = 'block';
-        }
-    };
-
-});
+    <script src="script.js"></script>
+</body>
+</html>
