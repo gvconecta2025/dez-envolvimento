@@ -1,170 +1,118 @@
-/* --- 1. Reset Básico e Padrões Globais --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEZ-Envolvimento - Desenvolvimento para Adolescentes</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
 
-html, body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8f9fa; /* Um branco um pouco mais suave */
-    color: #333;
-    line-height: 1.6;
-}
+    <!-- 1. Cabeçalho -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-menu">
+                <button class="menu-btn" aria-label="Abrir menu">☰</button>
+                <a href="index.html" class="logo-text">DEZ-Envolvimento</a>
+            </div>
+            <div class="header-account">
+                <button class="account-btn" aria-label="Acessar perfil">👤</button>
+            </div>
+        </div>
+    </header>
 
-a {
-    text-decoration: none;
-    color: inherit; /* Herda a cor do elemento pai */
-}
+    <!-- 2. Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- 2.1. Seção de Pesquisa -->
+            <section class="search-section">
+                <h1 class="main-title">DEZ-Envolvimento</h1>
+                <form id="search-form" class="search-bar">
+                    <input type="search" id="search-input" placeholder="Pesquisar artigos...">
+                    <button type="submit" aria-label="Pesquisar">🔍</button>
+                </form>
+            </section>
 
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem; /* Tamanho dos ícones */
-}
+            <!-- 2.2. Grade de Artigos -->
+            <section class="card-grid" id="card-grid">
+                
+                <!-- Card do Artigo 0001 (Destaque) -->
+                <article class="article-card">
+                    <a href="https://dez-envolvimento.vercel.app/artigos/artigo0001.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/artigo0001.jpg" alt="Jovem estudando em seu quarto com livros e um caderno, simbolizando o desenvolvimento intelectual">
+                        <div class="card-content">
+                            <h3>Artigo 0001: O Desenvolvimento Cognitivo na Adolescência</h3>
+                            <p>Entenda como o cérebro do adolescente se desenvolve e como estimular o aprendizado.</p>
+                        </div>
+                    </a>
+                </article>
 
-img {
-    max-width: 100%;
-    display: block;
-}
+                <!-- Card de Artigo (Modelo) -->
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/fase-1.jpg" alt="Adolescente pensativo olhando para o horizonte, representando a crise de identidade">
+                        <div class="card-content">
+                            <h3>Fase 1: A Crise de Identidade e a Busca por Autonomia</h3>
+                            <p>Entenda os principais conflitos e desafios que marcam o início da adolescência.</p>
+                        </div>
+                    </a>
+                </article>
 
-/* --- 2. Estrutura e Layout --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto; /* Centraliza o conteúdo */
-    padding: 0 20px; /* Espaçamento nas laterais */
-}
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/socializacao.jpg" alt="Grupo de jovens conversando e rindo juntos">
+                        <div class="card-content">
+                            <h3>Fase 2: A Importância do Grupo e da Socialização</h3>
+                            <p>Como as amizades e os grupos sociais moldam o comportamento e a personalidade.</p>
+                        </div>
+                    </a>
+                </article>
 
-/* --- 3. Cabeçalho --- */
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/futuro-carreira.jpg" alt="Jovem olhando um mapa de opções de carreira e futuro">
+                        <div class="card-content">
+                            <h3>Fase 3: O Despertar para o Futuro e a Carreira</h3>
+                            <p>Orientações para ajudar seu filho a pensar nas suas paixões e futuras escolhas profissionais.</p>
+                        </div>
+                    </a>
+                </article>
 
-.header-menu {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Espaço entre o menu e o logo */
-}
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/comunicacao.jpg" alt="Pai e filho conversando de forma aberta e amigável em um sofá">
+                        <div class="card-content">
+                            <h3>Comunicação Não-Violenta com Adolescentes</h3>
+                            <p>Técnicas para construir um diálogo aberto e de confiança, mesmo nos momentos difíceis.</p>
+                        </div>
+                    </a>
+                </article>
 
-.logo-text {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #5f6368;
-}
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/tecnologia.jpg" alt="Adolescente usando um smartphone com um olhar preocupado">
+                        <div class="card-content">
+                            <h3>Tecnologia e Saúde Mental: Limites Saudáveis</h3>
+                            <p>Como equilibrar o uso de telas e proteger o bem-estar emocional do seu filho.</p>
+                        </div>
+                    </a>
+                </article>
 
-.menu-btn, .account-btn {
-    color: #5f6368;
-}
+                <article class="article-card">
+                    <a href="artigo.html">
+                        <img src="images/inteligencia-emocional.jpg" alt="Cérebro com ícones de emoções ao redor, simbolizando inteligência emocional">
+                        <div class="card-content">
+                            <h3>Desenvolvendo a Inteligência Emocional na Juventude</h3>
+                            <p>Atividades e conversas que fortalecem a resiliência e a empatia dos jovens.</p>
+                        </div>
+                    </a>
+                </article>
 
-/* --- 4. Seção de Pesquisa --- */
-.search-section {
-    text-align: center;
-    padding: 60px 0;
-}
+            </section>
+        </div>
+    </main>
 
-.main-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #202124;
-}
-
-.search-bar {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    box-shadow: 0 1px 6px rgba(32,33,36,0.1);
-    transition: box-shadow 0.2s;
-}
-
-.search-bar:hover, .search-bar:focus-within {
-    box-shadow: 0 2px 8px rgba(32,33,36,0.2);
-}
-
-#search-input {
-    flex-grow: 1;
-    border: none;
-    background: transparent;
-    padding: 12px 20px;
-    font-size: 1rem;
-}
-
-#search-input:focus {
-    outline: none;
-}
-
-.search-bar button {
-    padding: 0 20px;
-    font-size: 1.2rem;
-    color: #80868b;
-}
-
-/* --- 5. Grade de Artigos --- */
-.card-grid {
-    display: grid;
-    /* Cria colunas responsivas: elas terão no mínimo 300px e no máximo 1fr (ocupam o espaço disponível) */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px; /* Espaçamento entre os cards */
-    padding-bottom: 60px;
-}
-
-.article-card {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden; /* Garante que a imagem não "vaze" das bordas arredondadas */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.article-card:hover {
-    transform: translateY(-5px); /* Efeito de "levantar" o card */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-}
-
-.article-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.card-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    /* Limita o título a 2 linhas */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.card-content p {
-    font-size: 0.95rem;
-    color: #5f6368;
-    /* Limita a descrição a 2 linhas */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* --- 6. Responsividade para Telas Pequenas --- */
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 2.5rem;
-    }
-
-    .search-section {
-        padding: 40px 0;
-    }
-}
+    <script src="script.js"></script>
+</body>
+</html>
